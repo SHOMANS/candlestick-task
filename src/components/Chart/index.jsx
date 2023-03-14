@@ -1,17 +1,16 @@
 import React, { useMemo } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
-import { defaultOptions } from '../../utils/chartDefaultConfig';
+// utils
+import { defaultOptions } from '../../utils/chartDefaultOptions';
 
-import { CSVText, smallCSVText } from '../../mock/SPUS';
+// hooks
+import useGetData from '../../hooks/useGetData';
 
 import './style.css';
-import { convertCsvToArray } from '../../utils/convertCSVtoArray';
 
 const Chart = () => {
-  const data = convertCsvToArray(smallCSVText);
-
-  console.log(data);
+  const { data, loading, error } = useGetData();
 
   const series = useMemo(
     () => [
@@ -25,7 +24,8 @@ const Chart = () => {
 
   return (
     <div className='chart'>
-      <ReactApexChart options={defaultOptions} series={series} type='candlestick' height={350} />
+      {error && <p className='error_message'>{error}</p>}
+      {loading ? <div>Loading...</div> : <ReactApexChart options={defaultOptions} series={series} type='candlestick' height={350} />}
     </div>
   );
 };

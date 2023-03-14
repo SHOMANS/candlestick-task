@@ -5,3 +5,11 @@
   overflow: hidden;
   padding: 2rem 0;
 }
+
+.error_message {
+  color: red;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 1rem;
+}
