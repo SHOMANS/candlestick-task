@@ -3,6 +3,7 @@ export const inputsArray = [
     name: 'interval',
     type: 'number',
     label: 'Interval',
+    placeholder: 'Enter a number',
   },
   {
     name: 'type',

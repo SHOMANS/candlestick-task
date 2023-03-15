@@ -17,7 +17,7 @@ const Home = () => {
 
   return (
     <Container>
-      <Form />
+      <Form isRenderChart={isRenderChart} />
 
       {isRenderChart && <Chart />}
     </Container>
