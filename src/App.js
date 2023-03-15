@@ -18,7 +18,9 @@ function App() {
     <div className='App'>
       <Header />
 
-      <Suspense fallback={<LazyLoading />}>{router}</Suspense>
+      <div className='wrapper'>
+        <Suspense fallback={<LazyLoading />}>{router}</Suspense>
+      </div>
 
       <Footer />
     </div>
