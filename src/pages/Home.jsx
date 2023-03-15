@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 // components
 import Chart from '../components/Chart';
 import Container from '../components/Container';
+import Form from '../components/Form';
 
 const Home = () => {
   const [searchParams] = useSearchParams();
@@ -14,7 +15,13 @@ const Home = () => {
     return currentParams.period1 && currentParams.period2 && currentParams.interval;
   }, [currentParams.period1, currentParams.period2, currentParams.interval]);
 
-  return <Container>{isRenderChart && <Chart />}</Container>;
+  return (
+    <Container>
+      <Form />
+
+      {isRenderChart && <Chart />}
+    </Container>
+  );
 };
 
 export default Home;
