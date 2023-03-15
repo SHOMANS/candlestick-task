@@ -1,12 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const InputWithLabel = ({ register, errors, label, name, type = 'text', options }) => {
+import './style.css';
+
+const InputWithLabel = ({ register, errors, label, name, type = 'text', options, ...rest }) => {
   return (
     <div className='input_box'>
-      <label htmlFor={name}>{label}</label>
+      <label className='input_label' htmlFor={name}>
+        {label}
+      </label>
 
-      {type === 'select' ? <SelectInput {...{ register, errors, label, name, options }} /> : <input id={name} type={type} {...register(name)} />}
+      {type === 'select' ? (
+        <SelectInput {...{ register, errors, label, name, options }} />
+      ) : (
+        <input className='input_field' id={name} type={type} {...register(name)} {...rest} />
+      )}
 
       <p className='input_error_message'>{errors[name]?.message}</p>
     </div>
@@ -14,7 +22,7 @@ const InputWithLabel = ({ register, errors, label, name, type = 'text', options 
 };
 
 const SelectInput = ({ register, name, options }) => (
-  <select id={name} {...register(name)}>
+  <select className='input_field' id={name} {...register(name)}>
     {options.map((option) => (
       <option key={option.value} value={option.value}>
         {option.title}
