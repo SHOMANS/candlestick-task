@@ -4,13 +4,12 @@ export const defaultOptions = {
     type: 'candlestick',
   },
   title: {
-    text: 'CandleStick Chart - Category X-axis',
-    align: 'left',
+    text: 'CandleStick Chart',
+    align: 'center',
   },
   annotations: {
     xaxis: [
       {
-        x: 'Oct 06 14:00',
         borderColor: '#00E396',
         label: {
           borderColor: '#00E396',
@@ -21,22 +20,11 @@ export const defaultOptions = {
           },
           orientation: 'horizontal',
           offsetY: 7,
-          text: 'Annotation Test',
         },
       },
     ],
   },
-  tooltip: {
-    enabled: true,
-  },
-  xaxis: {
-    type: 'category',
-    labels: {
-      formatter: function (val) {
-        return val;
-      },
-    },
-  },
+
   yaxis: {
     tooltip: {
       enabled: true,

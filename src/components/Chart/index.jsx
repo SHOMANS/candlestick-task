@@ -24,8 +24,13 @@ const Chart = () => {
 
   return (
     <div className='chart'>
-      {error && <p className='error_message'>{error}</p>}
-      {loading ? <div>Loading...</div> : <ReactApexChart options={defaultOptions} series={series} type='candlestick' height={350} />}
+      {loading ? (
+        <div>Loading...</div>
+      ) : error ? (
+        <p className='error_message'>{error}</p>
+      ) : (
+        <ReactApexChart options={defaultOptions} series={series} type='candlestick' height={350} />
+      )}
     </div>
   );
 };
