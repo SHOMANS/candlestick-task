@@ -1,18 +1,22 @@
-import React, { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { downloadCSV } from '../api/endpoints';
 import { convertCsvToArray } from '../utils/convertCSVtoArray';
+import { useSearchParams } from 'react-router-dom';
 
 const useGetData = () => {
-  const [data, setData] = React.useState([]);
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState(null);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const getData = React.useCallback(async () => {
+  const [searchParams] = useSearchParams();
+
+  const getData = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await axios.get(downloadCSV({ period1: '1633381200', period2: '1664917199', interval: '1mo' }));
+      const currentParams = Object.fromEntries([...searchParams]);
+      const res = await axios.get(downloadCSV(currentParams));
       const myData = convertCsvToArray(res.data); // to convert the data from text to the chape which the chart can read
       setError(null); // to remove error message if the request success
       setData(myData);
@@ -21,11 +25,11 @@ const useGetData = () => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [searchParams]);
 
   useEffect(() => {
     getData();
-  }, [getData]);
+  }, [getData, searchParams]);
 
   return { data, loading, error };
 };
